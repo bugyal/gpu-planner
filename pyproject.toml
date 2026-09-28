@@ -9,7 +9,7 @@ description = "Can I run model X on my hardware, and when does renting beat buyi
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
-authors = [{ name = "coding agent", email = "coding@localhost" }]
+authors = [{ name = "Ashish Bhatt" }]
 keywords = ["llm", "gpu", "vram", "quantisation", "local-inference", "capacity-planning"]
 classifiers = [
   "Development Status :: 3 - Alpha",
