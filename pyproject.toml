@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gpu-planner"
+version = "0.1.0"
+description = "Can I run model X on my hardware, and when does renting beat buying?"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+authors = [{ name = "coding agent", email = "coding@localhost" }]
+keywords = ["llm", "gpu", "vram", "quantisation", "local-inference", "capacity-planning"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Hardware",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+gpu-planner = "gpu_planner.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/gpu_planner"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

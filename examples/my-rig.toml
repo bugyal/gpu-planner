@@ -1,0 +1,6 @@
+gpu = "rtx-3090-24g"
+vram_gb = 24
+bandwidth_gbs = 936
+ram_gb = 128
+cpu_cores = 16
+os = "Ubuntu 24.04"
