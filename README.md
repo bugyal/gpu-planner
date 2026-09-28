@@ -1,5 +1,9 @@
 # gpu-planner
 
+[![ci](https://github.com/bugyal/gpu-planner/actions/workflows/ci.yml/badge.svg)](https://github.com/bugyal/gpu-planner/actions/workflows/ci.yml)
+![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+
 Answers two questions people keep redoing by hand in forum threads:
 
 1. **Can I run model X on my hardware?** — per-quant feasibility, VRAM breakdown,
@@ -138,6 +142,27 @@ absurd break-even.
 
 Units: memory is reported in decimal GB, matching how GPUs are sold. The two
 exceptions are visible in the code rather than silently mixed.
+
+## Why a local CLI and not a web calculator
+
+Free web calculators for this already exist (benchlm.ai, aimultiple,
+erans/selfhostllm, localaimaster), and for a quick one-off lookup they are fine.
+gpu-planner differs on four points:
+
+- **Local CLI, no browser tab.** It runs in a shell, exits non-zero on bad
+  input, and prints JSON with `--json` — so it can sit inside an agent pipeline
+  or a one-liner (`gpu-planner ... | jq`) the way a web form cannot.
+- **Hardware auto-detect.** It reads the actual machine — GPU model and VRAM,
+  RAM, memory bandwidth — instead of asking you to fill a form from memory.
+  Any detected value can be overridden with a flag or a small inventory file.
+- **A layer-offload overspill plan.** When weights do not fit, it computes the
+  per-layer split (how many of the 80 layers move to CPU, how much VRAM that
+  frees, the max context that still fits) — arithmetic the web forms do not
+  attempt. They stop at "does not fit".
+- **The math is shown with its assumptions.** The throughput model and the
+  rent-vs-buy break-even are documented formulas with stated efficiency
+  factors and limitations, not a black box: you can check why a number came
+  out the way it did.
 
 ## Honest limitations
 
